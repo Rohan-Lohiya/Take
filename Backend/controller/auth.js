@@ -16,7 +16,7 @@ const secretKey = process.env.JWT_SECRET || "your-secret-key"; // Ensure this is
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.client_id,
+      clientID: "517796194757-5v3a6kfcihpm0ki1ghcuo2lgj1sd8j9b.apps.googleusercontent.com",
       clientSecret: process.env.client_secret,
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
