@@ -11,7 +11,7 @@ dotenv.config();
 
 const router = express.Router();
 
-const secretKey = process.env.JWT_SECRET || "your-secret-key"; // Ensure this is in your environment variables
+const secretKey = "6c730a8a5d4671897f8f254fe2b0abef2374fcd4d788baf7c8bde3e7c9e9da18" || "your-secret-key"; // Ensure this is in your environment variables
 
 passport.use(
   new GoogleStrategy(
