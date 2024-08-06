@@ -20,7 +20,7 @@ dotenv.config();
 const port = 3000;
 
 app.use(cors({
-  origin: "http://10.1.1.147/:5173",
+  origin: "http://10.1.1.147:5173",
   methods: "GET, POST, PUT, DELETE",
   credentials: true
 }));
@@ -62,7 +62,10 @@ app.get('/api/balance', authenticateToken, async(req, res) => {
     return res.status(500).json({ message: 'Error accessing the database.' });
   }
 });
-
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
