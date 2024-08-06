@@ -63,6 +63,6 @@ app.get('/api/balance', authenticateToken, async(req, res) => {
   }
 });
 
-app.listen(port, '10.1.1.147', () => {
+app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
