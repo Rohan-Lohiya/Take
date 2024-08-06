@@ -20,13 +20,13 @@ dotenv.config();
 const port = 3000;
 
 app.use(cors({
-  origin: "http://10.1.1.147:5173",
+  origin: "https://take-online-money.web.app/",
   methods: "GET, POST, PUT, DELETE",
   credentials: true
 }));
 
 app.use(session({
-  secret: "12345gcvmjhfvcvbb",
+  secret: `${process.env.SESSION_SECRET}`,
   resave: false,
   saveUninitialized: true
 }));
@@ -48,7 +48,7 @@ app.get('/api/balance', authenticateToken, async(req, res) => {
   // Fetch the user's balance from the database
   try {
     const userId = req.user.googleID; // Retrieve the user ID from the authenticated request
-    console.log(`this is googleid`,userId);
+    console.log("this is googlei",userId);
     const user = await userdb.findOne({ googleID: userId });
 
     if (!user) {
@@ -62,10 +62,7 @@ app.get('/api/balance', authenticateToken, async(req, res) => {
     return res.status(500).json({ message: 'Error accessing the database.' });
   }
 });
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
