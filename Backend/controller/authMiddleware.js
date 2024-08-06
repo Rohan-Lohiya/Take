@@ -12,7 +12,7 @@ const authenticateToken = (req, res, next) => {
       return res.status(403).json({ message: 'No token provided.' });
     }
   
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
+    jwt.verify(token, "6c730a8a5d4671897f8f254fe2b0abef2374fcd4d788baf7c8bde3e7c9e9da18", (err, decodedUser) => {
       if (err) {
         return res.status(403).json({ message: 'Invalid token.' });
       }
