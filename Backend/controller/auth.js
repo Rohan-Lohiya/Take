@@ -18,7 +18,7 @@ passport.use(
     {
       clientID: "517796194757-5v3a6kfcihpm0ki1ghcuo2lgj1sd8j9b.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "/auth/google/callback",
+      callbackURL: "https://take-ten.vercel.app/auth/google/callback",
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
