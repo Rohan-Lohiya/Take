@@ -16,8 +16,8 @@ const secretKey = "6c730a8a5d4671897f8f254fe2b0abef2374fcd4d788baf7c8bde3e7c9e9d
 passport.use(
   new GoogleStrategy(
     {
-      clientID: "517796194757-5v3a6kfcihpm0ki1ghcuo2lgj1sd8j9b.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientID: "517796194757-dhta0meb292ef9190tn3de4vkv33rm3i.apps.googleusercontent.com",
+      clientSecret: "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",
       callbackURL: "https://take-ten.vercel.app/auth/google/callback",
       scope: ["profile", "email"],
     },
