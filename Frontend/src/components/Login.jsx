@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 const Login = () => {
   const url = import.meta.env.VITE_API_URL;
   const loginwithGoogle = () => {
-    window.open(`http://localhost:3000/auth/google/callback`, "_self");
+    window.open(`https://take-beta.vercel.app/auth/google`, "_self");
    
   }
   /*useEffect(() => {
