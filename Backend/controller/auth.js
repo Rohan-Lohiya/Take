@@ -74,6 +74,12 @@ router.get(
     });
     console.log(token);
     // Send token back to client
+    res.cookie("auth_token", token, {
+      httpOnly: true, // Prevents JavaScript access to the cookie
+      secure: true, // Ensures the cookie is sent only over HTTPS
+      sameSite: "None", // Allows cross-site cookies
+      maxAge: 3600000, // Cookie expires in 1 hour
+    });
     res.redirect(
       `https://take-e3k2.vercel.app/dashboard?token=${token}` // Attach token as a query parameter
     );
