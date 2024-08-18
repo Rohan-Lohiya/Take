@@ -75,7 +75,7 @@ router.get(
     console.log(token);
     // Send token back to client
     res.redirect(
-      `hhttps://take-e3k2.vercel.app/dashboard?token=${token}` // Attach token as a query parameter
+      `https://take-e3k2.vercel.app/dashboard?token=${token}` // Attach token as a query parameter
     );
   }
 );
