@@ -12,6 +12,7 @@ const { router: minerout } = require('./controller/minesrouting');
 const { router: dicerout } = require('./controller/dicerouting'); 
 const userdb = require("./model/userSchema");
 const authenticateToken = require('./controller/authMiddleware');
+const MongoStore = require("connect-mongo"); 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,9 +27,16 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: "12345gcvmjhfvcvbb",
+  secret: process.env.SESSION_SECRET || "your-secret-key", // Store this securely in .env
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: mongoURI,  // MongoDB connection string
+    collectionName: 'sessions', // The collection where sessions will be stored
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,  // 1 day in milliseconds
+  },
 }));
 
 app.use(passport.initialize());
