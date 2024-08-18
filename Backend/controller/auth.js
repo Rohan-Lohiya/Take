@@ -82,6 +82,7 @@ router.get(
 
 router.get("/login/success", (req, res) => {
   res.set('Cache-Control', 'no-store');
+  console.log("req.user in /login/success:", req.user);
   if (req.user) {
     res.status(200).json({ message: "User Login", user: req.user });
   } else {
