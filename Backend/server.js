@@ -31,7 +31,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: mongoURI,  // MongoDB connection string
+    mongoUrl: process.env.MONGO_URI,  // MongoDB connection string
     collectionName: 'sessions', // The collection where sessions will be stored
   }),
   cookie: {
