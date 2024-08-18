@@ -21,7 +21,7 @@ dotenv.config();
 const port = 3000;
 
 app.use(cors({
-  origin: "https://take-e3k2.vercel.app/", // No trailing slash
+  origin: "https://take-e3k2.vercel.app", // No trailing slash
   methods: "GET, POST, PUT, DELETE",
   credentials: true
 }));
