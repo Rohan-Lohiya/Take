@@ -27,13 +27,14 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || "your-secret-key",
+  secret: "your-secret-key",
   resave: false,
-  saveUninitialized: false, // Set to false to avoid saving empty sessions
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }), // Storing sessions in MongoDB
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Ensures cookies are only sent over HTTPS in production
+    secure: true,  // Make sure this is true in production for HTTPS
+    sameSite: 'None',  // Allow cross-site cookies
     maxAge: 24 * 60 * 60 * 1000  // 1 day
   }
 }));
