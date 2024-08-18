@@ -20,7 +20,7 @@ dotenv.config();
 const port = 3000;
 
 app.use(cors({
-  origin: "http://localhost:5173", // Remove the trailing slash
+  origin: "https://take-online-money.web.app", // Remove the trailing slash
   methods: "GET, POST, PUT, DELETE",
   credentials: true
 }));
