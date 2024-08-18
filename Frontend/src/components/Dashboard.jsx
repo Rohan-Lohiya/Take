@@ -9,10 +9,11 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const getuser = async() => {
         try {
-          const response = await axios.get(`http://localhost:3000/auth/login/success`, {withCredentials: true});
+          const response = await axios.get(`https://take-beta.vercel.app/auth/login/success`, {withCredentials: true});
           
           setuserdata(response.data.user);
         } catch (error) {
+          console.log("error from dashboard");
           navigate("/login")
         }
       }
