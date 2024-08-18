@@ -14,11 +14,11 @@ const Navbar = () => {
   console.log("response", userdata);
   const getuser = async() => {
     try {
-      const response = await axios.get(`http://localhost:3000/auth/login/success`, {withCredentials: true});
+      const response = await axios.get(`https://take-beta.vercel.app/auth/login/success`, {withCredentials: true});
       
       setuserdata(response.data.user)
     } catch (error) {
-      console.log(`this is error`);
+      console.log(`this is error Navbar`);
     }
   }
   useEffect(() => {
@@ -33,7 +33,7 @@ const Navbar = () => {
   }, [userdata, dispatch]);
   
   const handlelogout = () => {
-    window.open(`http://localhost:3000/auth/logout`, "_self");
+    window.open(`https://take-beta.vercel.app/auth/logout`, "_self");
   }
   
   
