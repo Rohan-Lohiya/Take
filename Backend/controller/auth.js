@@ -63,7 +63,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "https://take-online-money.web.app/login",
+    failureRedirect: "https://take-e3k2.vercel.app/login",
   }),
   (req, res) => {
     const user = req.user;
@@ -75,7 +75,7 @@ router.get(
     console.log(token);
     // Send token back to client
     res.redirect(
-      `https://take-online-money.web.app/dashboard?token=${token}` // Attach token as a query parameter
+      `hhttps://take-e3k2.vercel.app/dashboard?token=${token}` // Attach token as a query parameter
     );
   }
 );
@@ -95,7 +95,7 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect("https://take-online-money.web.app/");
+    res.redirect("https://take-e3k2.vercel.app/");
   });
 });
 
