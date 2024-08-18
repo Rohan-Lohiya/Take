@@ -43,11 +43,16 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id); // Save only the user ID
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await userdb.findById(id); // Retrieve the user by ID
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
 });
 
 router.get(
