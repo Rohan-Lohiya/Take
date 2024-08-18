@@ -70,7 +70,7 @@ router.get(
     console.log(token);
     // Send token back to client
     res.redirect(
-      `http://localhost:5173/dashboard?token=${token}` // Attach token as a query parameter
+      `https://take-online-money.web.app/dashboard?token=${token}` // Attach token as a query parameter
     );
   }
 );
@@ -88,7 +88,7 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect("http://localhost:5173/");
+    res.redirect("https://take-online-money.web.app/");
   });
 });
 
