@@ -27,16 +27,15 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || "your-secret-key", // Store this securely in .env
+  secret: process.env.SESSION_SECRET || "your-secret-key",
   resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI,  // MongoDB connection string
-    collectionName: 'sessions', // The collection where sessions will be stored
-  }),
+  saveUninitialized: false, // Set to false to avoid saving empty sessions
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }), // Storing sessions in MongoDB
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24,  // 1 day in milliseconds
-  },
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // Ensures cookies are only sent over HTTPS in production
+    maxAge: 24 * 60 * 60 * 1000  // 1 day
+  }
 }));
 
 app.use(passport.initialize());
