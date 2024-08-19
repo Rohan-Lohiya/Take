@@ -27,15 +27,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Session configuration with MongoDB session store
+
 app.use(session({
-  secret: process.env.SESSION_SECRET || "12345gcvmjhfvcvbb",
+  secret: process.env.SESSION_SECRET || 'your-session-secret',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }), // Store sessions in MongoDB
-  cookie: {
-    secure: process.env.NODE_ENV === 'production', // Send cookie over HTTPS only in production
-    maxAge: 24 * 60 * 60 * 1000 // 1 day expiration for cookie
-  }
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  cookie: { secure: process.env.NODE_ENV === 'production' } // Ensure cookies are secure in production
 }));
 
 // Passport initialization
