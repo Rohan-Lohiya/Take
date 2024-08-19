@@ -43,7 +43,7 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.id); // Save only the user ID
+  done(null, user); // Save only the user ID
 });
 
 passport.deserializeUser(async (id, done) => {
