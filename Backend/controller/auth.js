@@ -1,5 +1,3 @@
-// auth.js
-
 const express = require("express");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
@@ -11,8 +9,9 @@ dotenv.config();
 
 const router = express.Router();
 
-const secretKey = process.env.JWT_SECRET || "your-secret-key"; // Ensure this is in your environment variables
+const secretKey = process.env.JWT_SECRET || "your-secret-key"; // Ensure this is set in your environment variables
 
+// Google OAuth strategy
 passport.use(
   new GoogleStrategy(
     {
@@ -22,7 +21,7 @@ passport.use(
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("profile", profile);
+      console.log("Google Profile:", profile);
       try {
         let user = await userdb.findOne({ googleID: profile.id });
         if (!user) {
@@ -50,31 +49,34 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+// Google login route
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
+// Google callback route
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "https://take-online-money.web.app/login",
+    failureRedirect: process.env.NODE_ENV === 'production' ? "https://take-online-money.web.app/login" : "http://localhost:5173/login"
   }),
   (req, res) => {
     const user = req.user;
 
     // Generate JWT token
     const token = jwt.sign({ googleID: user.googleID }, secretKey, {
-      expiresIn: "1h", // Token expires in 1 hour
+      expiresIn: "1h",
     });
-    console.log(token);
-    // Send token back to client
+
+    // Redirect to dashboard with token as query parameter
     res.redirect(
-      `http://localhost:5173/dashboard?token=${token}` // Attach token as a query parameter
+      `${process.env.NODE_ENV === 'production' ? 'https://take-online-money.web.app' : 'http://localhost:5173'}/dashboard?token=${token}`
     );
   }
 );
 
+// Route to check login success
 router.get("/login/success", (req, res) => {
   if (req.user) {
     res.status(200).json({ message: "User Login", user: req.user });
@@ -83,12 +85,13 @@ router.get("/login/success", (req, res) => {
   }
 });
 
+// Logout route
 router.get("/logout", (req, res, next) => {
   req.logout(function (err) {
     if (err) {
       return next(err);
     }
-    res.redirect("http://localhost:5173/");
+    res.redirect(process.env.NODE_ENV === 'production' ? "https://take-online-money.web.app" : "http://localhost:5173");
   });
 });
 
