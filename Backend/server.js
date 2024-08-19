@@ -1,36 +1,44 @@
-// server.js
-
 const express = require('express');
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
-const connectToDatabase = require("./dbconnection/database");
 const session = require("express-session");
-const { router: authRouter, passport } = require('./controller/auth');  // Importing the auth router and passport
+const MongoStore = require('connect-mongo'); // Add this for MongoDB session store
 const dotenv = require("dotenv");
-const { router: minerout } = require('./controller/minesrouting'); 
-const { router: dicerout } = require('./controller/dicerouting'); 
+const { router: authRouter, passport } = require('./controller/auth');
+const { router: minerout } = require('./controller/minesrouting');
+const { router: dicerout } = require('./controller/dicerouting');
 const userdb = require("./model/userSchema");
 const authenticateToken = require('./controller/authMiddleware');
+const connectToDatabase = require("./dbconnection/database");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 dotenv.config();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(cors({
-  origin: "http://localhost:5173", // Remove the trailing slash
+// CORS configuration
+const corsOptions = {
+  origin: "http://localhost:5173",
   methods: "GET, POST, PUT, DELETE",
   credentials: true
-}));
+};
+app.use(cors(corsOptions));
 
+// Session configuration with MongoDB session store
 app.use(session({
-  secret: "12345gcvmjhfvcvbb",
+  secret: process.env.SESSION_SECRET || "12345gcvmjhfvcvbb",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }), // Store sessions in MongoDB
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // Send cookie over HTTPS only in production
+    maxAge: 24 * 60 * 60 * 1000 // 1 day expiration for cookie
+  }
 }));
 
+// Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -39,23 +47,21 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Use the auth router for all routes starting with /auth
 app.use("/auth", authRouter);
 app.use("/takegames/mines", minerout);
 app.use("/takegames/dice", dicerout);
 
+// Example of a protected route
 app.get('/api/balance', authenticateToken, async(req, res) => {
-  // Fetch the user's balance from the database
   try {
-    const userId = req.user.googleID; // Retrieve the user ID from the authenticated request
-    console.log("this is googlei",userId);
+    const userId = req.user.googleID;
+    console.log("Google ID:", userId);
     const user = await userdb.findOne({ googleID: userId });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
 
-    // Send the user's balance
     res.json({ balance: user.balance });
   } catch (error) {
     console.error('Database Error:', error);
@@ -63,9 +69,10 @@ app.get('/api/balance', authenticateToken, async(req, res) => {
   }
 });
 
+// Connect to database and start server
 connectToDatabase().then(() => {
   app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Server listening on port ${port}`);
   });
 }).catch(error => {
   console.error("Failed to connect to the database:", error);
