@@ -8,8 +8,7 @@ const userdb = require("../model/userSchema");
 dotenv.config();
 
 const router = express.Router();
-
-const secretKey = process.env.JWT_SECRET || "your-secret-key"; // Ensure this is set in your environment variables
+const secretKey = process.env.JWT_SECRET || "your-secret-key";
 
 // Google OAuth strategy
 passport.use(
@@ -54,7 +53,6 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-
 // Google login route
 router.get(
   "/google",
@@ -65,28 +63,27 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: process.env.NODE_ENV === 'production' ? "https://take-money-app.vercel.app/login" : "https://take-money-app.vercel.app/login"
+    failureRedirect: process.env.NODE_ENV === 'production' 
+      ? "https://take-money-app.vercel.app/login" 
+      : "https://take-money-app.vercel.app/login"
   }),
   (req, res) => {
     const user = req.user;
-
-    // Generate JWT token
-    const token = jwt.sign({ googleID: user.googleID }, secretKey, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ googleID: user.googleID }, secretKey, { expiresIn: "1h" });
     console.log("User authenticated:", req.user);
 
-    // Redirect to dashboard with token as query parameter
     res.redirect(
-      `${process.env.NODE_ENV === 'production' ? 'https://take-money-app.vercel.app' : 'https://take-money-app.vercel.app'}/dashboard?token=${token}`
+      `${process.env.NODE_ENV === 'production' 
+        ? 'https://take-money-app.vercel.app' 
+        : 'https://take-money-app.vercel.app'}/dashboard?token=${token}`
     );
   }
 );
 
 // Route to check login success
 router.get("/login/success", (req, res) => {
-  console.log("Request Headers:", req.headers); // Log headers
-  console.log("Request User:", req.user); // Log user data
+  console.log("Request Headers:", req.headers);
+  console.log("Request User:", req.user);
 
   if (req.user) {
     res.status(200).json({ message: "User Login", user: req.user });
@@ -101,7 +98,9 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect(process.env.NODE_ENV === 'production' ? "https://take-money-app.vercel.app" : "https://take-money-app.vercel.app");
+    res.redirect(process.env.NODE_ENV === 'production' 
+      ? "https://take-money-app.vercel.app" 
+      : "https://take-money-app.vercel.app");
   });
 });
 
