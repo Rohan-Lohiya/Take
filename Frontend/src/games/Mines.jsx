@@ -27,7 +27,7 @@ const Mines = () => {
   const apiRequest = async (endpoint, data) => {
     const token = localStorage.getItem("token");
   
-    const response = await fetch(`https://take-beta.vercel.app/${endpoint}`, {
+    const response = await fetch(`https://take-woad.vercel.app/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
