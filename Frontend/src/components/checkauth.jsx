@@ -11,7 +11,7 @@ const useCheckAuth = () => {
   useEffect(() => {
     const getuser = async () => {
       try {
-        const response = await axios.get(`https://take-beta.vercel.app/auth/login/success`, { withCredentials: true });
+        const response = await axios.get(`https://take-woad.vercel.app/auth/login/success`, { withCredentials: true });
         console.log("response", response);
       } catch (error) {
         navigate("/login");
