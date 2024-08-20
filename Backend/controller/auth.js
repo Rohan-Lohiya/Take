@@ -42,12 +42,18 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await userdb.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
 });
+
 
 // Google login route
 router.get(
@@ -68,6 +74,7 @@ router.get(
     const token = jwt.sign({ googleID: user.googleID }, secretKey, {
       expiresIn: "1h",
     });
+    console.log("User authenticated:", req.user);
 
     // Redirect to dashboard with token as query parameter
     res.redirect(
