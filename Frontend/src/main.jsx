@@ -29,7 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/games" element={<Games />} />
           <Route path="/games/diceroll" element={<Diceroll />} />
           <Route path="/about" element={<Readhere />} />
-          <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 */}
+         {/* Catch-all route for 404 */}
         </Routes>
         <Footer /> {/* Footer appears on all routes */}
       </Router>
