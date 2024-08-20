@@ -101,7 +101,7 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect(process.env.NODE_ENV === 'production' ? "https://take-money-app.vercel.app : "https://take-money-app.vercel.app");
+    res.redirect(process.env.NODE_ENV === 'production' ? "https://take-money-app.vercel.app" : "https://take-money-app.vercel.app");
   });
 });
 
