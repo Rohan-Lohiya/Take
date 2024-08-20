@@ -33,11 +33,15 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-  cookie: { secure: process.env.NODE_ENV === 'production' } // Ensure cookies are secure in production
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 60 * 60 * 1000 // 1 day
+  }
 }));
-app.use((req, res, next) => {
-  console.log("Session Store Debugging:", req.session);
-  next();
+
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
 });
 // Passport initialization
 app.use(passport.initialize());
