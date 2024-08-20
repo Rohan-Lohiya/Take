@@ -65,7 +65,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: process.env.NODE_ENV === 'production' ? "https://take-online-money.web.app/login" : "http://localhost:5173/login"
+    failureRedirect: process.env.NODE_ENV === 'production' ? "https://take-money-app.vercel.app/login" : "https://take-money-app.vercel.app/login"
   }),
   (req, res) => {
     const user = req.user;
@@ -78,7 +78,7 @@ router.get(
 
     // Redirect to dashboard with token as query parameter
     res.redirect(
-      `${process.env.NODE_ENV === 'production' ? 'https://take-online-money.web.app' : 'http://localhost:5173'}/dashboard?token=${token}`
+      `${process.env.NODE_ENV === 'production' ? 'https://take-money-app.vercel.app' : 'https://take-money-app.vercel.app'}/dashboard?token=${token}`
     );
   }
 );
@@ -101,7 +101,7 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect(process.env.NODE_ENV === 'production' ? "https://take-online-money.web.app" : "http://localhost:5173");
+    res.redirect(process.env.NODE_ENV === 'production' ? "https://take-money-app.vercel.app : "https://take-money-app.vercel.app");
   });
 });
 
