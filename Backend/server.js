@@ -35,7 +35,10 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: { secure: process.env.NODE_ENV === 'production' } // Ensure cookies are secure in production
 }));
-
+app.use((req, res, next) => {
+  console.log("Session Store Debugging:", req.session);
+  next();
+});
 // Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
