@@ -10,7 +10,6 @@ import Dashboard from './components/Dashboard.jsx';
 import Diceroll from './games/Diceroll.jsx';
 import Games from './components/Games.jsx';
 import Readhere from './components/Readhere.jsx';
-import NotFound from './components/NotFound.jsx'; // You need a NotFound component
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store.js';
