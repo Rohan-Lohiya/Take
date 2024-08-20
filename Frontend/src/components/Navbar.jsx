@@ -14,7 +14,7 @@ const Navbar = () => {
   console.log("response", userdata);
   const getuser = async() => {
     try {
-      const response = await axios.get(`https://take-beta.vercel.app/auth/login/success`, {withCredentials: true});
+      const response = await axios.get(`https://take-woad.vercel.app/auth/login/success`, {withCredentials: true});
       
       setuserdata(response.data.user)
     } catch (error) {
@@ -33,7 +33,7 @@ const Navbar = () => {
   }, [userdata, dispatch]);
   
   const handlelogout = () => {
-    window.open(`https://take-beta.vercel.app/auth/logout`, "_self");
+    window.open(`https://take-woad.vercel.app/auth/logout`, "_self");
   }
   
   
