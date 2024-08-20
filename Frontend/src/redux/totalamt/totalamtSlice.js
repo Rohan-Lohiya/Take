@@ -53,7 +53,7 @@ export const fetchBalance = () => async (dispatch) => {
     const token = localStorage.getItem('token'); // Get token from local storage
     console.log('Token:', token); // Log the token for debugging
 
-    const response = await fetch('https://take-beta.vercel.app/api/balance', {
+    const response = await fetch('https://take-woad.vercel.app/api/balance', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
