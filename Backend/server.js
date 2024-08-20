@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const session = require("express-session");
-const MongoStore = require('connect-mongo'); // Add this for MongoDB session store
+const MongoStore = require('connect-mongo');
 const dotenv = require("dotenv");
 const { router: authRouter, passport } = require('./controller/auth');
 const { router: minerout } = require('./controller/minesrouting');
@@ -12,13 +12,11 @@ const userdb = require("./model/userSchema");
 const authenticateToken = require('./controller/authMiddleware');
 const connectToDatabase = require("./dbconnection/database");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 dotenv.config();
+app.set('trust proxy', 1);  // Trust reverse proxy (e.g., Vercel)
 
 const port = process.env.PORT || 3000;
 
-// CORS configuration
 const corsOptions = {
   origin: "https://take-money-app.vercel.app",
   methods: "GET, POST, PUT, DELETE",
@@ -26,8 +24,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Session configuration with MongoDB session store
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Session configuration with MongoDB session store
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your-session-secret',
   resave: false,
@@ -43,11 +43,11 @@ app.use(session({
 mongoose.connection.on('connected', () => {
   console.log('Connected to MongoDB');
 });
+
 // Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Main routes
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
@@ -56,7 +56,7 @@ app.use("/auth", authRouter);
 app.use("/takegames/mines", minerout);
 app.use("/takegames/dice", dicerout);
 
-// Example of a protected route
+// Protected route
 app.get('/api/balance', authenticateToken, async(req, res) => {
   try {
     const userId = req.user.googleID;
