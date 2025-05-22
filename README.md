@@ -1,4 +1,5 @@
-![Homepage](https://github.com/user-attachments/assets/2aa03223-c12f-45da-97bf-6d1ac3db1827)
+![Homepage](https://github.com/user-attachments/assets/20f21d00-d9fd-4fbc-99f0-861be0b40a0a)
+
 
 # 🎰 Take – A MERN Stack Betting Web App
 
