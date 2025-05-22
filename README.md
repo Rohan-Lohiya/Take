@@ -58,8 +58,7 @@ url=http://localhost:5000
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/take-betting-app.git
-cd take-betting-app
+git clone https://github.com/Rohan-Lohiya/Take.git
 ```
 
 ### 2. Install dependencies
