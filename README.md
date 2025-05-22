@@ -19,7 +19,7 @@
 
 ## 🛠️ Technologies Used
 
-- **Frontend:** React.js, TailwindCSS
+- **Frontend:** React.js
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB Atlas
 - **Authentication:** Google OAuth 2.0, JWT, Express-Session
