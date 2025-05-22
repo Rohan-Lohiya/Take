@@ -1,19 +1,20 @@
 # 🎰 Take – A MERN Stack Betting Web App
 
-**Take** is a fully functional betting platform inspired by [Stake.com](https://stake.com), built using the **MERN stack (MongoDB, Express.js, React.js, Node.js)**. It allows users to sign in via Google, join chat groups, place bets, and more. The app uses **Fetch API** for communication between frontend and backend and includes **socket.io** for real-time interactions.
+**Take** is a fully functional betting platform inspired by [Stake.com](https://stake.com), built using the **MERN stack (MongoDB, Express.js, React.js, Node.js)**. It allows users to sign in via Google, join chat groups, place bets, and more. The app uses **Fetch API** for communication between frontend and backend.
 
 ---
 
 ## 📦 Features
 
-- 🔐 Google OAuth login
-- 💬 Real-time group chat (socket.io)
-- 📈 Live betting interface
-- 🧑‍🤝‍🧑 Group creation, member management, admin control
-- 🧾 Persistent chat data via MongoDB
-- ⚙️ Role-based access (Admin vs Member)
-- ⚡ Fully functional MERN app ready for deployment
-
+- 🎰 Betting Interface – Inspired by Stake.com, users can place bets and view outcomes.
+- 🔐 Google OAuth Login – Secure user authentication via Google.
+- 💰 Points System – Users bet and earn or lose points based on outcomes.
+- 📊 Game Variety – Supports multiple types of betting games (can be extended).
+- 🧾 Persistent Data – All user, bet, and transaction data is stored in MongoDB.
+- ⚙️ Backend API – RESTful API using Express and Mongoose for all server-side operations.
+- 🌐 Frontend-Backend Integration – Communicates using the Fetch API.
+- 🚀 Fully Functional MERN Stack App – Ready for local use or deployment.
+  
 ---
 
 ## 🛠️ Technologies Used
@@ -22,7 +23,6 @@
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB Atlas
 - **Authentication:** Google OAuth 2.0, JWT, Express-Session
-- **Real-Time:** Socket.io
 
 ---
 
@@ -97,12 +97,11 @@ npm run dev
 ---
 
 ## 🧪 Testing
-
-- Go to `http://localhost:3000`
-- Sign in using Google
-- Create or join a group
-- Add members, promote admins, and chat live
-- Place demo bets (this is just a UI/logic simulation; no real money)
+- Go to http://localhost:5173
+- Sign in using your Google account
+- Place demo bets (no real money involved)
+- Track your points and betting outcomes
+- Navigate through a fully functional betting interface
 
 ---
 
@@ -123,7 +122,6 @@ root/
 ├── backend/
 │   ├── controller/
 │   ├── model/
-│   ├── socket/
 │   ├── dbconnection/
 │   ├── .env
 │   └── server.js
@@ -136,14 +134,7 @@ root/
 
 ---
 
-## ✍️ Author
-
 **Rohan Lohiya**  
 IIIT Guwahati  
-Open to collaboration and feedback!
 
 ---
-
-## 📄 License
-
-This project is licensed under the MIT License.
