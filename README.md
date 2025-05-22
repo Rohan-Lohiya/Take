@@ -49,7 +49,7 @@ Create a `.env` file in the `frontend` directory with:
 url=http://localhost:5000
 ```
 
-> 🔁 If deploying, replace all instances of `http://localhost:5000` or `http://localhost:3000` with your production domain URL in both frontend and backend.
+> 🔁 If deploying, replace all instances of `http://localhost:5173` or `http://localhost:3000` with your production domain URL in both frontend and backend.
 
 ---
 
