@@ -1,3 +1,4 @@
+![image](https://github.com/user-attachments/assets/53134b37-7f84-4ad6-a47b-a92348ab6286)
 # 🎰 Take – A MERN Stack Betting Web App
 
 **Take** is a fully functional betting platform inspired by [Stake.com](https://stake.com), built using the **MERN stack (MongoDB, Express.js, React.js, Node.js)**. It allows users to sign in via Google, join chat groups, place bets, and more. The app uses **Fetch API** for communication between frontend and backend.
